@@ -423,3 +423,4 @@ obj-$(CONFIG_MSM_FIQ) += msm7k_fiq_handler.o
 
 obj-$(CONFIG_SEC_LOG_LAST_KMSG) += sec_log.o
 obj-$(CONFIG_TURBO_BOOST) += msm_turbo.o
+obj-$(CONFIG_MSM_CPUFREQ_LIMITER) += cpufreq_limit.o

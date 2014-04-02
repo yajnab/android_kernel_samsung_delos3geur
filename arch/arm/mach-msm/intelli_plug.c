@@ -235,7 +235,7 @@ static void __cpuinit intelli_plug_work_fn(struct work_struct *work)
 				sampling_time = DEF_SAMPLING_MS;
 		}
 
-		if (!suspended) {
+		if (!hotplug_suspended) {
 			switch (cpu_count) {
 			case 1:
 				if (persist_count > 0)
@@ -313,7 +313,7 @@ static void intelli_plug_suspend(struct power_suspend *handler)
 	flush_workqueue(intelliplug_wq);
 
 	mutex_lock(&intelli_plug_mutex);
-	suspended = true;
+	hotplug_suspended = true;
 	mutex_unlock(&intelli_plug_mutex);
 
 	// put rest of the cores to sleep!

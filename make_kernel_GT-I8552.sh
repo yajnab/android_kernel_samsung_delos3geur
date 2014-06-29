@@ -1,0 +1,2 @@
+make delos_chnopen_user_defconfig
+make

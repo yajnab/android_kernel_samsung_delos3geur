@@ -1,0 +1,15 @@
+ui_print(" ");
+ui_print("Gluon Kernel");
+ui_print(" ");
+show_progress(0.100000, 0);
+assert(package_extract_file("boot.img", "/tmp/boot.img"),
+       write_raw_image("/tmp/boot.img", "boot"),
+       delete("/tmp/boot.img"));
+show_progress(0.2, 10);
+show_progress(0.100000, 0);
+ui_print(" ");
+ui_print("Installation Completed!!!!");
+ui_print(" ");
+ui_print(" ");
+ui_print(" By:");
+ui_print("  yajnab");

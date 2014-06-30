@@ -178,6 +178,12 @@ config HUGETLB_PAGE
 
 source "fs/configfs/Kconfig"
 
+config DYNAMIC_FSYNC
+	bool "dynamic file sync control"
+	default n
+	help
+	  An experimental file sync control using Android's early suspend / late resume drivers
+
 endmenu
 
 menuconfig MISC_FILESYSTEMS

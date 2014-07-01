@@ -146,6 +146,6 @@ obj-$(CONFIG_DPRAM)	+= dpram/
 #Sensors
 obj-y				+= sensors/
 
-ifeq (1, $(shell if [ -d drivers/exfat ] ; then echo 1 ; fi))
-obj-y   += exfat/
+ifeq (1, $(shell if [ -d ../../../../../../kernel/drivers/exfat ] ; then echo 1 ; fi))
+obj-y                           += exfat/
 endif

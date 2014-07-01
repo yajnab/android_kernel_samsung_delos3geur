@@ -407,11 +407,11 @@ static void msm_cpu_late_resume(struct early_suspend *h)
 
 }
 
-+static struct early_suspend msm_cpu_early_suspend_handler = {
-+	.level = EARLY_SUSPEND_LEVEL_BLANK_SCREEN,
-+	.suspend = msm_cpu_early_suspend,
-+	.resume = msm_cpu_late_resume,
-+};
+static struct early_suspend msm_cpu_early_suspend_handler = {
+	.level = EARLY_SUSPEND_LEVEL_BLANK_SCREEN,
+	.suspend = msm_cpu_early_suspend,
+	.resume = msm_cpu_late_resume,
+};
 static int msm_cpufreq_suspend(void)
 {
 	int cpu;

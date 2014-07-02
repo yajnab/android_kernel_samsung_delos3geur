@@ -102,6 +102,20 @@ DECLARE_EVENT_CLASS(mm_vmscan_direct_reclaim_begin_template,
 
 	TP_ARGS(order, may_writepage, gfp_flags),
 
+#ifndef CONFIG_DISABLE_LUMPY_RECLAIM
+		unsigned long nr_lumpy_taken,
+		unsigned long nr_lumpy_dirty,
+		unsigned long nr_lumpy_failed,
+#endif
+		isolate_mode_t isolate_mode,
+		int file),
+
+#ifndef CONFIG_DISABLE_LUMPY_RECLAIM
+	TP_ARGS(order, nr_requested, nr_scanned, nr_taken, nr_lumpy_taken, nr_lumpy_dirty, nr_lumpy_failed, isolate_mode, file),
+#else
+	TP_ARGS(order, nr_requested, nr_scanned, nr_taken, isolate_mode, file),
+#endif
+
 	TP_STRUCT__entry(
 		__field(	int,	order		)
 		__field(	int,	may_writepage	)
@@ -271,6 +285,21 @@ DECLARE_EVENT_CLASS(mm_vmscan_lru_isolate_template,
 
 	TP_ARGS(order, nr_requested, nr_scanned, nr_taken, nr_lumpy_taken, nr_lumpy_dirty, nr_lumpy_failed, isolate_mode, file),
 
+#ifndef CONFIG_DISABLE_LUMPY_RECLAIM
+		unsigned long nr_lumpy_taken,
+		unsigned long nr_lumpy_dirty,
+		unsigned long nr_lumpy_failed,
+#endif
+	isolate_mode_t isolate_mode,
+		int file),
+
+#ifndef CONFIG_DISABLE_LUMPY_RECLAIM
+	TP_ARGS(order, nr_requested, nr_scanned, nr_taken, nr_lumpy_taken, nr_lumpy_dirty, nr_lumpy_failed, isolate_mode, file),
+#else
+	TP_ARGS(order, nr_requested, nr_scanned, nr_taken, isolate_mode, file),
+#endif
+
+
 	TP_STRUCT__entry(
 		__field(int, order)
 		__field(unsigned long, nr_requested)
@@ -279,6 +308,12 @@ DECLARE_EVENT_CLASS(mm_vmscan_lru_isolate_template,
 		__field(unsigned long, nr_lumpy_taken)
 		__field(unsigned long, nr_lumpy_dirty)
 		__field(unsigned long, nr_lumpy_failed)
+
+#ifndef CONFIG_DISABLE_LUMPY_RECLAIM
+		__field(unsigned long, nr_lumpy_taken)
+		__field(unsigned long, nr_lumpy_dirty)
+		__field(unsigned long, nr_lumpy_failed)
+#endif
 		__field(isolate_mode_t, isolate_mode)
 		__field(int, file)
 	),
@@ -291,16 +326,34 @@ DECLARE_EVENT_CLASS(mm_vmscan_lru_isolate_template,
 		__entry->nr_lumpy_taken = nr_lumpy_taken;
 		__entry->nr_lumpy_dirty = nr_lumpy_dirty;
 		__entry->nr_lumpy_failed = nr_lumpy_failed;
+#ifndef CONFIG_DISABLE_LUMPY_RECLAIM
+		__entry->nr_lumpy_taken = nr_lumpy_taken;
+		__entry->nr_lumpy_dirty = nr_lumpy_dirty;
+		__entry->nr_lumpy_failed = nr_lumpy_failed;
+#endif
 		__entry->isolate_mode = isolate_mode;
 		__entry->file = file;
 	),
 
+
+	TP_printk("isolate_mode=%d order=%d nr_requested=%lu nr_scanned=%lu nr_taken=%lu file=%d",
+
+#ifndef CONFIG_DISABLE_LUMPY_RECLAIM
 	TP_printk("isolate_mode=%d order=%d nr_requested=%lu nr_scanned=%lu nr_taken=%lu contig_taken=%lu contig_dirty=%lu contig_failed=%lu file=%d",
+#else
+	TP_printk("isolate_mode=%d order=%d nr_requested=%lu nr_scanned=%lu nr_taken=%lu file=%d",
+#endif
 		__entry->isolate_mode,
 		__entry->order,
 		__entry->nr_requested,
 		__entry->nr_scanned,
 		__entry->nr_taken,
+
+#ifndef CONFIG_DISABLE_LUMPY_RECLAIM
+		__entry->nr_lumpy_taken,
+		__entry->nr_lumpy_dirty,
+		__entry->nr_lumpy_failed,
+#endif
 		__entry->nr_lumpy_taken,
 		__entry->nr_lumpy_dirty,
 		__entry->nr_lumpy_failed,
@@ -320,7 +373,19 @@ DEFINE_EVENT(mm_vmscan_lru_isolate_template, mm_vmscan_lru_isolate,
 		int file),
 
 	TP_ARGS(order, nr_requested, nr_scanned, nr_taken, nr_lumpy_taken, nr_lumpy_dirty, nr_lumpy_failed, isolate_mode, file)
+#ifndef CONFIG_DISABLE_LUMPY_RECLAIM
+		unsigned long nr_lumpy_taken,
+		unsigned long nr_lumpy_dirty,
+		unsigned long nr_lumpy_failed,
+#endif
+		isolate_mode_t isolate_mode,
+		int file),
 
+#ifndef CONFIG_DISABLE_LUMPY_RECLAIM
+	TP_ARGS(order, nr_requested, nr_scanned, nr_taken, nr_lumpy_taken, nr_lumpy_dirty, nr_lumpy_failed, isolate_mode, file)
+#else
+	TP_ARGS(order, nr_requested, nr_scanned, nr_taken, isolate_mode, file)
+#endif
 );
 
 DEFINE_EVENT(mm_vmscan_lru_isolate_template, mm_vmscan_memcg_isolate,
@@ -336,7 +401,19 @@ DEFINE_EVENT(mm_vmscan_lru_isolate_template, mm_vmscan_memcg_isolate,
 		int file),
 
 	TP_ARGS(order, nr_requested, nr_scanned, nr_taken, nr_lumpy_taken, nr_lumpy_dirty, nr_lumpy_failed, isolate_mode, file)
+#ifndef CONFIG_DISABLE_LUMPY_RECLAIM
+		unsigned long nr_lumpy_taken,
+		unsigned long nr_lumpy_dirty,
+		unsigned long nr_lumpy_failed,
+#endif
+		isolate_mode_t isolate_mode,
+		int file),
 
+#ifndef CONFIG_DISABLE_LUMPY_RECLAIM
+	TP_ARGS(order, nr_requested, nr_scanned, nr_taken, nr_lumpy_taken, nr_lumpy_dirty, nr_lumpy_failed, isolate_mode, file)
+#else
+	TP_ARGS(order, nr_requested, nr_scanned, nr_taken, isolate_mode, file)
+#endif
 );
 
 TRACE_EVENT(mm_vmscan_writepage,

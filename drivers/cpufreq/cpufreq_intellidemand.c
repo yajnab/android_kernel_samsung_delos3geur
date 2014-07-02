@@ -92,10 +92,6 @@ static int sampling_rate_boosted;
 static u64 sampling_rate_boosted_time;
 static unsigned int current_sampling_rate;
 
-#ifdef CONFIG_CPUFREQ_ID_PERFLOCK
-static unsigned int saved_policy_min;
-#endif
-
 static unsigned int eco_mode_active = 0;
 
 static void do_dbs_timer(struct work_struct *work);
@@ -1257,7 +1253,7 @@ enum {
 };
 
 enum {	
-	BOOT_CPU = 0,	
+	//BOOT_CPU = 0,	
 	NON_BOOT_CPU1,
 	NON_BOOT_CPU2,
 	NON_BOOT_CPU3,

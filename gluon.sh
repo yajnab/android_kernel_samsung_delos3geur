@@ -71,7 +71,8 @@ clear
 $cyan
 echo "Making the zImage-the real deal"
 $violet
-ARCH=arm CROSS_COMPILE=../../toolchain/linaro/bin/arm-eabi- make -j16
+ARCH=arm CROSS_COMPILE=../../toolchain/linaro/bin/arm-eabi- make -j16 CONFIG_DEBUG_SECTION_MISMATCH=y
+
 clear
 $cyan 
 
@@ -83,6 +84,7 @@ rm -rf gluon_works/bootimage/unpack
 rm -rf gluon_works/bootimage/output
 rm -rf gluon_works/bootimage/boot
 rm -rf gluon_works/bootimage/source_img
+rm VERSION
 clear
 $white
 echo " |============================ F.I.N.I.S.H ! =============================|"

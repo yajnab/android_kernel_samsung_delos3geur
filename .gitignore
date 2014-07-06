@@ -51,6 +51,16 @@ modules.builtin
 /debian/
 
 #
+#Gluon Files
+#
+/input_bootimage/
+/out/
+/output/
+
+# Fuse files
+.fuse*
+
+#
 # git files that we don't want to ignore even it they are dot-files
 #
 !.gitignore

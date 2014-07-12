@@ -127,7 +127,7 @@ echo " Making boot.img"
 cd bootimage
 $violet
 rm -rf ../../output/boot.img
-tools/mkbootimg --kernel unpack/boot.img-zImage --cmdline 'androidboot.hardware=qcom loglevel=1 vmalloc=200M' --pagesize 4096 --base 0x00200000 --ramdisk_offset 0x01300000 --ramdisk unpack/boot.img-ramdisk-new.gz -o ../../output/boot.img
+tools/mkbootimg --kernel unpack/boot.img-zImage --cmdline 'androidboot.hardware=qcom loglevel=1 vmalloc=200M' --pagesize 4096 --base 0x00200000 --ramdisk_offset 0x01300000 --ramdisk unpack/boot.img-ramdisk.gz -o ../../output/boot.img
 rm -rf unpack
 rm -rf output
 rm -rf boot

@@ -62,6 +62,12 @@ obj-$(CONFIG_TOUCHSCREEN_WM97XX)	+= wm97xx-ts.o
 wm97xx-ts-$(CONFIG_TOUCHSCREEN_WM9705)	+= wm9705.o
 wm97xx-ts-$(CONFIG_TOUCHSCREEN_WM9712)	+= wm9712.o
 wm97xx-ts-$(CONFIG_TOUCHSCREEN_WM9713)	+= wm9713.o
+
+# for sweep2wake, leave 1st to avoid merge issues at the end of the file
+obj-$(CONFIG_TOUCHSCREEN_SWEEP2WAKE)                += sweep2wake.o
+# for doubletap2wake, leave 1st to avoid merge issues at the end of the file
+obj-$(CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE)        += doubletap2wake.o
+
 obj-$(CONFIG_TOUCHSCREEN_WM97XX_ATMEL)	+= atmel-wm97xx.o
 obj-$(CONFIG_TOUCHSCREEN_WM97XX_MAINSTONE)	+= mainstone-wm97xx.o
 obj-$(CONFIG_TOUCHSCREEN_WM97XX_ZYLONITE)	+= zylonite-wm97xx.o
